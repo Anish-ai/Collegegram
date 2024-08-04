@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Genos:ital,wght@0,100..900;1,100..900&family=Geo:ital@0;1&family=Geostar&family=Grenze+Gotisch:wght@100..900&family=Playwrite+BE+VLG:wght@100..400&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Genos:ital,wght@0,100..900;1,100..900&family=Geo:ital@0;1&family=Geostar&family=Grenze+Gotisch:wght@100..900&family=Jaldi:wght@400;700&family=Playwrite+BE+VLG:wght@100..400&display=swap"
+        rel="stylesheet">
+    <title>Collegegram</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            background-color: #f8f8f800;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .nav-bar-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            background: red;
+        }
+
+        .nav-bar-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-left: 10px;
+            font-family: Grenze Gotisch, cursive;
+            font-size: 30px;
+        }
+
+        .nav-bar-links {
+            display: flex;
+            align-items: center;
+            justify-content: end;
+        }
+
+        .search-bar input {
+            padding: 5px 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+        }
+
+        .profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .profile-name {
+            margin-right: 10px;
+            font-family: jaldi, sans-serif;
+            font-weight: bold;
+            font-size: 25px;
+        }
+
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: blue;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .search-bar input {
+            padding: 5px 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            margin-right: 10px;
+            height: 30px;
+            font-size: large;
+        }
+
+        .search-bar img {
+            width: 30px;
+            height: 30px;
+            margin-right: 5px;
+        }
+
+        .side-bar {
+            position: absolute;
+            left: 0;
+            display: flex;
+            align-items: center;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 450px;
+            width: 200px;
+            justify-content: center;
+            border-radius: 0 40px 40px 0;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .home-btn {
+            position: relative;
+            width: 75px;
+            height: 75px;
+            background: rgb(254, 107, 107);
+            margin-right: 10px;
+            border-radius: 50%;
+            margin: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 3px solid #ff0000;
+            cursor: pointer;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .chats-btn {
+            position: relative;
+            width: 75px;
+            height: 75px;
+            background: rgb(255, 255, 255);
+            margin-right: 10px;
+            border-radius: 50%;
+            margin: 30px;
+            border: 3px solid #1500ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .post-btn {
+            position: relative;
+            width: 75px;
+            height: 75px;
+            background: rgb(255, 255, 255);
+            margin-right: 10px;
+            border-radius: 50%;
+            margin: 30px;
+            border: 3px solid #00D200;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .notifications-btn {
+            position: relative;
+            width: 75px;
+            height: 75px;
+            background: rgb(255, 255, 255);
+            margin-right: 10px;
+            border-radius: 50%;
+            margin: 30px;
+            border: 3px solid #D5D501;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .selected {
+            position: absolute;
+            left: 0;
+            width: 140px;
+            height: 80px;
+            background: rgb(192, 53, 53);
+            border-radius: 0 39.9px 39.9px 0;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .main-container {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 30px 40px 30px 40px;
+        }
+
+        .container-body {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid black;
+            border-radius: 10px;
+        }
+
+        .home-content {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background-color: #D5D501;
+        }
+
+        .chats-content {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid black;
+            border-radius: 10px;
+        }
+
+        .chat-list {
+            width: 20%;
+            height: 100%;
+            border-right: 1px solid black;
+        }
+
+        .chat-box {
+            width: 80%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-box-header {
+            height: 10%;
+            border-bottom: 1px solid black;
+        }
+
+        .chat-box-input {
+            height: 10%;
+        }
+
+        .chat-search-bar {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 10px;
+        }
+
+        .chat-search-bar input {
+            padding: 5px 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            height: 25px;
+            font-size: large;
+            width: calc(100% - 40px);
+        }
+
+        .chat-search-icon {
+            width: 30px;
+            height: 30px;
+        }
+
+        .chats-container {
+            height: calc(100% - 77px);
+            padding: 10px 0;
+            overflow-y: auto;
+            border: 1px solid black;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            gap: 10px;
+        }
+
+        .chat-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 0 10px;
+        }
+
+        .chat-profile-name {
+            font-style: jaldi, sans-serif;
+            font-weight: bold;
+        }
+
+        .chat-profile-top-msg {
+            font-style: jaldi, sans-serif;
+        }
+
+        .chat-box-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .chat-box-header-name {
+            font-style: jaldi, sans-serif;
+            font-weight: bold;
+        }
+
+        .chat-message-content {
+            padding: 10px;
+            border-radius: 10px;
+            margin: 5px;
+            display: flex;
+            justify-content: end;
+        }
+
+        .chat-message-time {
+            font-size: xx-small;
+            margin: 5px;
+            align-self: flex-end;
+            min-width: fit-content;
+        }
+
+        .chat-message {
+            width: fit-content;
+            max-width: 300px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-box-messages-div {
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            gap: 10px;
+            overflow: auto;
+        }
+
+        .chat-box-messages {
+            max-height: 100%;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            gap: 10px;
+            overflow: auto;
+        }
+
+        .sent {
+            background: #b1b5ff;
+            color: rgb(0, 0, 0);
+            align-self: flex-end;
+            border-radius: 10px;
+        }
+
+        .received {
+            background: #dadada;
+            color: rgb(0, 0, 0);
+            align-self: flex-start;
+            border-radius: 10px;
+        }
+
+        .chat-box-input {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .chat-box-input-message {
+            width: calc(100% - 50px);
+        }
+
+        .chat-box-input-message input {
+            padding: 5px 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            height: 25px;
+            font-size: large;
+            width: calc(100% - 40px);
+            font-style: jaldi, sans-serif;
+        }
+
+        .chat-box-input-send {
+            width: 40px;
+            height: 40px;
+            background: #b1b5ff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav-bar">
+        <div class="nav-bar-logo">
+            <!-- <img src="images/logo.png" alt="Collegegram"> -->
+            <div class="logo-img"></div>
+            <p class="nav-bar-title">COLLEGEGRAM</p>
+        </div>
+        <div class="nav-bar-links">
+            <div class="search-bar">
+                <img src="search.svg" alt="Search">
+                <input type="text" placeholder="Search">
+            </div>
+            <div class="profile">
+                <div class="profile-name">Anish Kumar</div>
+                <!-- <img src="images/profile.png" alt="Profile"> -->
+                <div class="profile-img"></div>
+            </div>
+        </div>
+    </div>
+    <div class="side-bar-container">
+        <div class="side-bar">
+            <div class="selected"></div>
+            <div class="side-bar-links">
+                <div class="home-btn">
+                    <img src="./homeactive.svg" alt="Home">
+                </div>
+                <div class="chats-btn">
+                    <img src="./chats.svg" alt="Chats">
+                </div>
+                <div class="post-btn">
+                    <img src="./post.svg" alt="Post">
+                </div>
+                <div class="notifications-btn">
+                    <img src="./notifications.svg" alt="Notifications">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="container-body">
+            <div class="home-content">
+
+            </div>
+            <div class="chats-content">
+                <div class="chat-list">
+                    <div class="chat-search-bar">
+                        <img class="chat-search-icon" src="search.svg" alt="Search">
+                        <input type="text" placeholder="Search">
+                    </div>
+                    <div class="chats-container">
+    
+                    </div>
+                </div>
+                <div class="chat-box">
+                    <div class="chat-box-header"></div>
+                    <div class="chat-box-messages-div">
+                        <div class="chat-box-messages">
+    
+                        </div>
+                    </div>
+                    <div class="chat-box-input">
+                        <div class="chat-box-input-message">
+                            <input type="text" placeholder="Type a message">
+                        </div>
+                        <div class="chat-box-input-send">
+                            <img src="send.svg" alt="Send">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const homeBtn = document.querySelector('.home-btn');
+        const chatsBtn = document.querySelector('.chats-btn');
+        const postBtn = document.querySelector('.post-btn');
+        const notificationsBtn = document.querySelector('.notifications-btn');
+        const selected = document.querySelector('.selected');
+        const sideBar = document.querySelector('.side-bar');
+        const mainContainer = document.querySelector('.main-container');
+        mainContainer.style.marginLeft = `${sideBar.offsetWidth}px`;
+        mainContainer.style.width = `calc(100% - 80px - ${sideBar.offsetWidth}px)`;
+        mainContainer.style.height = `calc(100vh - 2px - 60px - ${document.querySelector('.nav-bar').offsetHeight}px)`;
+        sideBar.style.backgroundColor = 'rgb(255, 205, 205)';
+        homeBtn.classList.add('active');
+        selected.style.top = `${homeBtn.offsetTop}px`;
+        handleActive();
+
+        function handleActive() {
+            if (homeBtn.classList.contains('active')) {
+                homeBtn.style.backgroundColor = '#FF8080';
+                selected.style.backgroundColor = '#ff0000';
+            } else if (chatsBtn.classList.contains('active')) {
+                chatsBtn.style.backgroundColor = '#8080FF';
+                selected.style.backgroundColor = '#1500ff';
+            } else if (postBtn.classList.contains('active')) {
+                postBtn.style.backgroundColor = '#80FF80';
+                selected.style.backgroundColor = '#00D200';
+            } else if (notificationsBtn.classList.contains('active')) {
+                notificationsBtn.style.backgroundColor = '#E3E349';
+                selected.style.backgroundColor = '#A4A400';
+            }
+        }
+
+        function handleNonActive() {
+            if (!homeBtn.classList.contains('active')) {
+                homeBtn.style.backgroundColor = 'white';
+                const homeBtnImg = homeBtn.querySelector('img');
+                homeBtnImg.src = './home.svg';
+            }
+            if (!chatsBtn.classList.contains('active')) {
+                chatsBtn.style.backgroundColor = 'white';
+                const chatsBtnImg = chatsBtn.querySelector('img');
+                chatsBtnImg.src = './chats.svg';
+            }
+            if (!postBtn.classList.contains('active')) {
+                postBtn.style.backgroundColor = 'white';
+                const postBtnImg = postBtn.querySelector('img');
+                postBtnImg.src = './post.svg';
+            }
+            if (!notificationsBtn.classList.contains('active')) {
+                notificationsBtn.style.backgroundColor = 'white';
+                const notificationsBtnImg = notificationsBtn.querySelector('img');
+                notificationsBtnImg.src = './notifications.svg';
+            }
+        }
+
+        homeBtn.addEventListener('click', () => {
+            sideBar.style.backgroundColor = 'rgb(255, 205, 205)';
+            selected.style.top = `${homeBtn.offsetTop}px`;
+            const homeBtnImg = homeBtn.querySelector('img');
+            homeBtnImg.src = './homeactive.svg';
+            if (selected.style.backgroundColor === '#ff0000') {
+                return;
+            } else {
+                homeBtn.classList.add('active');
+                chatsBtn.classList.remove('active');
+                postBtn.classList.remove('active');
+                notificationsBtn.classList.remove('active');
+                handleActive();
+                handleNonActive();
+            }
+        });
+
+        chatsBtn.addEventListener('click', () => {
+            sideBar.style.backgroundColor = 'rgb(205, 205, 255)';
+            selected.style.top = `${chatsBtn.offsetTop}px`;
+            const chatsBtnImg = chatsBtn.querySelector('img');
+            chatsBtnImg.src = './chatsactive.svg';
+            if (selected.style.backgroundColor === '#1500ff') {
+                return;
+            } else {
+                chatsBtn.classList.add('active');
+                homeBtn.classList.remove('active');
+                postBtn.classList.remove('active');
+                notificationsBtn.classList.remove('active');
+                handleActive();
+                handleNonActive();
+            }
+        });
+
+        postBtn.addEventListener('click', () => {
+            sideBar.style.backgroundColor = 'rgb(205, 255, 205)';
+            selected.style.top = `${postBtn.offsetTop}px`;
+            const postBtnImg = postBtn.querySelector('img');
+            postBtnImg.src = './postactive.svg';
+            if (selected.style.backgroundColor === '#00D200') {
+                return;
+            } else {
+                postBtn.classList.add('active');
+                chatsBtn.classList.remove('active');
+                homeBtn.classList.remove('active');
+                notificationsBtn.classList.remove('active');
+                handleActive();
+                handleNonActive();
+            }
+        });
+
+        notificationsBtn.addEventListener('click', () => {
+            sideBar.style.backgroundColor = 'rgb(255, 255, 205)';
+            selected.style.top = `${notificationsBtn.offsetTop}px`;
+            const notificationsBtnImg = notificationsBtn.querySelector('img');
+            notificationsBtnImg.src = './notificationsactive.svg';
+            if (selected.style.backgroundColor === '#D5D501') {
+                return;
+            } else {
+                notificationsBtn.classList.add('active');
+                chatsBtn.classList.remove('active');
+                postBtn.classList.remove('active');
+                homeBtn.classList.remove('active');
+                handleActive();
+                handleNonActive();
+            }
+        });
+
+        const chatList = document.querySelector('.chat-list');
+        const chatBox = document.querySelector('.chat-box');
+        const chatBoxMessages = document.querySelector('.chat-box-messages');
+        const chatBoxInput = document.querySelector('.chat-box-input');
+        const chatBoxHeader = document.querySelector('.chat-box-header');
+        const chatProfiles = [
+            {
+                name: 'Jatin kumar',
+                topMsg: 'Hello',
+                img: './profile.svg',
+                gender: 'male',
+                messages: [
+                    {
+                        msg: 'Hello',
+                        time: '10:00 AM',
+                        type: 'sent'
+                    },
+                    {
+                        msg: 'Hi',
+                        time: '10:01 AM',
+                        type: 'received'
+                    },
+                    {
+                        msg: 'How are you?',
+                        time: '10:02 AM',
+                        type: 'sent'
+                    },
+                    {
+                        msg: 'I am Jatin',
+                        time: '10:03 AM',
+                        type: 'received'
+                    }
+                ]
+            },
+            {
+                name: 'Diptanshu IITP',
+                topMsg: 'Hello',
+                img: './profile.svg',
+                gender: 'male',
+                messages: [
+                    {
+                        msg: 'Hello',
+                        time: '10:00 AM',
+                        type: 'sent'
+                    },
+                    {
+                        msg: 'Hi',
+                        time: '10:01 AM',
+                        type: 'received'
+                    },
+                    {
+                        msg: 'Who are youn 8ugh yud hgurdh 78gu hruh g8uhy8 h 78h ty8 hgyh dyhry hguh dtgheyugh y8uh egyrh?',
+                        time: '10:02 AM',
+                        type: 'sent'
+                    },
+                    {
+                        msg: 'I am Diptanshu',
+                        time: '10:03 AM',
+                        type: 'received'
+                    }
+                ]
+            },
+            {
+                name: 'Anish Kumar',
+                topMsg: 'Hello',
+                img: './profile.svg',
+                gender: 'male',
+                messages: [
+                    {
+                        msg: 'Hello',
+                        time: '10:00 AM',
+                        type: 'sent'
+                    },
+                    {
+                        msg: 'Hi',
+                        time: '10:01 AM',
+                        type: 'received'
+                    },
+                    {
+                        msg: 'Who are you?',
+                        time: '10:02 AM',
+                        type: 'sent'
+                    },
+                    {
+                        msg: 'I am Anish',
+                        time: '10:03 AM',
+                        type: 'received'
+                    },
+                    {
+                        msg: 'How are you?',
+                        time: '10:04 AM',
+                        type: 'sent'
+                    },
+                    {
+                        msg: 'I am fine',
+                        time: '10:05 AM',
+                        type: 'received'
+                    },
+                    {
+                        msg: 'Where are you?',
+                        time: '10:06 AM',
+                        type: 'sent'
+                    },
+                    {
+                        msg: 'I am at home',
+                        time: '10:07 AM',
+                        type: 'received'
+                    },
+                    {
+                        msg: 'What are you doing?',
+                        time: '10:08 AM',
+                        type: 'sent'
+                    },
+                    {
+                        msg: 'I am chatting with you',
+                        time: '10:09 AM',
+                        type: 'received'
+                    },
+                    {
+                        msg: 'What is your name?',
+                        time: '10:10 AM',
+                        type: 'sent'
+                    }
+                ]
+            },
+            {
+                name: 'Pritam Sir',
+                topMsg: 'Hello',
+                img: './profile.svg',
+                gender: 'unknown',
+                messages: [
+                    {
+                        msg: 'Hello',
+                        time: '10:00 AM',
+                        type: 'received'
+                    },
+                    {
+                        msg: 'Hi',
+                        time: '10:01 AM',
+                        type: 'sent'
+                    },
+                    {
+                        msg: 'Where is Jatin?',
+                        time: '10:02 AM',
+                        type: 'received'
+                    },
+                    {
+                        msg: 'I don\'t know',
+                        time: '10:03 AM',
+                        type: 'sent'
+                    }
+                ]
+            },
+            {
+                name: 'Nitin',
+                topMsg: 'Hello',
+                img: './profile.svg',
+                gender: 'female',
+                messages: [
+                    {
+                        msg: 'Hello',
+                        time: '10:00 AM',
+                        type: 'sent'
+                    },
+                    {
+                        msg: 'Hi',
+                        time: '10:01 AM',
+                        type: 'received'
+                    },
+                    {
+                        msg: 'How are you?',
+                        time: '10:02 AM',
+                        type: 'sent'
+                    },
+                    {
+                        msg: 'I am Nitin',
+                        time: '10:03 AM',
+                        type: 'received'
+                    }
+                ]
+            },
+            {
+                name: 'Rahul',
+                topMsg: 'Hello',
+                img: './profile.svg',
+                messages: [
+                    {
+                        msg: 'Hello',
+                        time: '10:00 AM',
+                        type: 'sent'
+                    },
+                    {
+                        msg: 'Hi',
+                        time: '10:01 AM',
+                        type: 'received'
+                    },
+                    {
+                        msg: 'Who are you?',
+                        time: '10:02 AM',
+                        type: 'sent'
+                    },
+                    {
+                        msg: 'I am Rahul',
+                        time: '10:03 AM',
+                        type: 'received'
+                    }
+                ]
+            },
+            {
+                name: 'Rohit',
+                topMsg: 'Hello',
+                img: './profile.svg',
+                messages: [
+                    {
+                        msg: 'Hello',
+                        time: '10:00 AM',
+                        type: 'sent'
+                    },
+                    {
+                        msg: 'Hi',
+                        time: '10:01 AM',
+                        type: 'received'
+                    },
+                    {
+                        msg: 'Who are you?',
+                        time: '10:02 AM',
+                        type: 'sent'
+                    },
+                    {
+                        msg: 'I am Rohit',
+                        time: '10:03 AM',
+                        type: 'received'
+                    }
+                ]
+            },
+            {
+                name: 'Rajesh',
+                topMsg: 'Hello',
+                img: './profile.svg',
+                messages: [
+                    {
+                        msg: 'Hello',
+                        time: '10:00 AM',
+                        type: 'sent'
+                    },
+                    {
+                        msg: 'Hi',
+                        time: '10:01 AM',
+                        type: 'received'
+                    },
+                    {
+                        msg: 'Who are you?',
+                        time: '10:02 AM',
+                        type: 'sent'
+                    },
+                    {
+                        msg: 'I am Rajesh',
+                        time: '10:03 AM',
+                        type: 'received'
+                    }
+                ]
+            },
+            {
+                name: 'Ramesh',
+                topMsg: 'Hello',
+                img: './profile.svg',
+                messages: [
+                    {
+                        msg: 'Hello',
+                        time: '10:00 AM',
+                        type: 'sent'
+                    },
+                    {
+                        msg: 'Hi',
+                        time: '10:01 AM',
+                        type: 'received'
+                    },
+                    {
+                        msg: 'Who are you?',
+                        time: '10:02 AM',
+                        type: 'sent'
+                    },
+                    {
+                        msg: 'I am Ramesh',
+                        time: '10:03 AM',
+                        type: 'received'
+                    }
+                ]
+            },
+            {
+                name: 'Raj',
+                topMsg: 'Hello',
+                img: './profile.svg',
+                messages: [
+                    {
+                        msg: 'Hello',
+                        time: '10:00 AM',
+                        type: 'sent'
+                    },
+                    {
+                        msg: 'Hi',
+                        time: '10:01 AM',
+                        type: 'received'
+                    },
+                    {
+                        msg: 'Who are you?',
+                        time: '10:02 AM',
+                        type: 'sent'
+                    },
+                ]
+            }
+        ]
+
+        const chatListContainer = document.querySelector('.chats-container');
+        chatProfiles.forEach(profile => {
+            const chatProfile = document.createElement('div');
+            chatProfile.classList.add('chat-profile');
+            chatProfile.innerHTML = `
+                <img src="${profile.img}" alt="Profile">
+                <div class="chat-profile-details">
+                    <div class="chat-profile-name">${profile.name}</div>
+                    <div class="chat-profile-top-msg">${profile.topMsg}</div>
+                </div>
+            `;
+            chatListContainer.appendChild(chatProfile);
+        });
+
+        function handleOpenedChat() {
+            const chatProfile = document.querySelectorAll('.chat-profile');
+            chatProfile.forEach(profile => {
+                if (profile.classList.contains('opened')) {
+                    profile.style.backgroundColor = '#AEAEAE';
+                } else {
+                    profile.style.backgroundColor = 'white';
+                }
+            }
+            );
+        }
+
+        const chatProfile = document.querySelectorAll('.chat-profile');
+        chatProfile.forEach((profile, index) => {
+            profile.addEventListener('mouseover', () => {
+                chatProfile.forEach((profile, i) => {
+                    if (i === index && !profile.classList.contains('opened')) {
+                        profile.style.backgroundColor = '#DADADA';
+                        return;
+                    } else if (!profile.classList.contains('opened')) {
+                        profile.style.backgroundColor = 'white';
+                    }
+                });
+            });
+            profile.addEventListener('mouseout', () => {
+                chatProfile.forEach((profile, i) => {
+                    if (i === index && !profile.classList.contains('opened')) {
+                        profile.style.backgroundColor = 'white';
+                        return;
+                    }
+                });
+            });
+            profile.addEventListener('click', () => {
+                chatProfile.forEach((profile, i) => {
+                    if (i === index) {
+                        profile.classList.add('opened');
+                    } else {
+                        profile.classList.remove('opened');
+                    }
+                    handleOpenedChat();
+                });
+                chatBoxHeader.innerHTML = `
+                    <img src="${chatProfiles[index].img}" alt="Profile">
+                    <div class="chat-box-header-details">
+                        <div class="chat-box-header-name">${chatProfiles[index].name}</div>
+                `;
+                chatBoxMessages.innerHTML = '';
+                chatProfiles[index].messages.forEach(message => {
+                    const chatMessage = document.createElement('div');
+                    chatMessage.classList.add('chat-message');
+                    chatMessage.innerHTML = `
+                        <div class="chat-message-content">${message.msg}</div>
+                        <div class="chat-message-time">${message.time}</div>
+                    `;
+                    if(message.type === 'sent') {
+                        chatMessage.classList.add('sent');
+                    } else {
+                        chatMessage.classList.add('received');
+                    }
+                    chatBoxMessages.appendChild(chatMessage);
+                });
+                const chatBoxInputSend = document.querySelector('.chat-box-input-send');
+                chatBoxInput.style.display = 'flex';
+                chatBoxInputSend.addEventListener('click', () => {
+                    const chatBoxInputMessage = document.querySelector('.chat-box-input-message input');
+                    const message = chatBoxInputMessage.value;
+                    const chatMessage = document.createElement('div');
+                    chatMessage.classList.add('chat-message');
+                    chatProfiles[index].messages.push({
+                        msg: message,
+                        time: new Date().toLocaleTimeString().split(' ')[0],
+                        type: 'sent'
+                    });
+                    chatMessage.innerHTML = `
+                        <div class="chat-message-content">${chatProfiles[index].messages[chatProfiles[index].messages.length - 1].msg}</div>
+                        <div class="chat-message-time">${chatProfiles[index].messages[chatProfiles[index].messages.length - 1].time}</div>
+                    `;
+                    chatMessage.classList.add('sent');
+                    chatBoxMessages.appendChild(chatMessage);
+                    chatBoxInputMessage.value = '';
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
