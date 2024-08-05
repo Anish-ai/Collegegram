@@ -219,7 +219,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            border: 1px solid black;
             border-radius: 10px;
         }
 
@@ -227,17 +226,17 @@
             position: absolute;
             height: 100%;
             width: 100%;
-            display: none;
+            display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #D5D501;
+            background-color: #ffffff;
         }
 
         .chats-content {
             position: absolute;
             height: 100%;
             width: 100%;
-            display: flex;
+            display: none;
             justify-content: center;
             align-items: center;
             border: 1px solid black;
@@ -415,6 +414,142 @@
             align-items: center;
             cursor: pointer;
         }
+
+        .home-container {
+            height: 100%;
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .post-contents {
+            height: 100%;
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+            background-color: whitesmoke;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgb(0, 0, 0);
+        }
+
+        .post-content {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px;
+            width: calc(100% - 40px);
+        }
+
+        .post-contents-title {
+            font-size: 35px;
+            font-weight: bold;
+            font-family: jaldi, sans-serif;
+            margin: 0px 0 0 10px;
+            height: 10%;
+            align-self: flex-start;
+        }
+
+        .post-content-profile img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .post-content-details {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .new-post-container {
+            width: 100%;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: auto;
+            scrollbar-width: none;
+        }
+
+        .post-content-name {
+            font-weight: bold;
+        }
+
+        .post-content-caption {
+            font-style: jaldi, sans-serif;
+        }
+
+        .gallery {
+            height: 100%;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid black;
+        }
+
+        .photos {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-wrap: wrap;
+            overflow: auto;
+            gap: 3%;
+            margin-top: 3%;
+            scrollbar-width: none;
+        }
+
+        .gallery-photo {
+            width: calc(100% / 4);
+            aspect-ratio: 1/1;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gallery-photo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        .upload-button {
+            height: fit-content;
+            width: fit-content;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #b1b5ff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .photo-cover {
+            position: absolute;
+            height: 80%;
+            aspect-ratio: 1/1;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-self: center;
+            align-self: center;
+            border-radius: 10px;
+            z-index: 99;
+        }
     </style>
 </head>
 
@@ -459,7 +594,21 @@
     <div class="main-container">
         <div class="container-body">
             <div class="home-content">
+                <div class="home-container">
+                    <div class="post-contents">
+                        <div class="post-contents-title">New Posts</div>
+                        <div class="new-post-container">
 
+                        </div>
+                    </div>
+                    <div class="gallery">
+                        <div class="photos"></div>
+                        <div class="upload-button">
+                            Upload
+                            <img src="upload.svg" alt="Upload">
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="chats-content">
                 <div class="chat-list">
@@ -468,14 +617,14 @@
                         <input type="text" placeholder="Search">
                     </div>
                     <div class="chats-container">
-    
+
                     </div>
                 </div>
                 <div class="chat-box">
                     <div class="chat-box-header"></div>
                     <div class="chat-box-messages-div">
                         <div class="chat-box-messages">
-    
+
                         </div>
                     </div>
                     <div class="chat-box-input">
@@ -487,6 +636,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="posts-content">
+
             </div>
         </div>
     </div>
@@ -994,7 +1146,7 @@
                         <div class="chat-message-content">${message.msg}</div>
                         <div class="chat-message-time">${message.time}</div>
                     `;
-                    if(message.type === 'sent') {
+                    if (message.type === 'sent') {
                         chatMessage.classList.add('sent');
                     } else {
                         chatMessage.classList.add('received');
@@ -1003,14 +1155,23 @@
                 });
                 const chatBoxInputSend = document.querySelector('.chat-box-input-send');
                 chatBoxInput.style.display = 'flex';
-                chatBoxInputSend.addEventListener('click', () => {
+                function sendMessage() {
                     const chatBoxInputMessage = document.querySelector('.chat-box-input-message input');
                     const message = chatBoxInputMessage.value;
                     const chatMessage = document.createElement('div');
                     chatMessage.classList.add('chat-message');
+                    //time calculation as AM and PM
+                    let date = new Date();
+                    let hours = date.getHours();
+                    let minutes = date.getMinutes();
+                    let ampm = hours >= 12 ? 'PM' : 'AM';
+                    hours = hours % 12;
+                    hours = hours ? hours : 12;
+                    minutes = minutes < 10 ? '0' + minutes : minutes;
+                    let strTime = hours + ':' + minutes + ' ' + ampm;
                     chatProfiles[index].messages.push({
                         msg: message,
-                        time: new Date().toLocaleTimeString().split(' ')[0],
+                        time: strTime,
                         type: 'sent'
                     });
                     chatMessage.innerHTML = `
@@ -1020,9 +1181,275 @@
                     chatMessage.classList.add('sent');
                     chatBoxMessages.appendChild(chatMessage);
                     chatBoxInputMessage.value = '';
+                    chatBoxMessages.scrollTop = chatBoxMessages.scrollHeight;
+                }
+                chatBoxInputSend.addEventListener('click', sendMessage);
+                chatBoxInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        sendMessage();
+                    }
                 });
             });
         });
+        const homeContent = document.querySelector('.home-content');
+        const homeContainer = document.querySelector('.home-container');
+        const postContents = document.querySelector('.post-contents');
+        const newPostContainer = document.querySelector('.new-post-container');
+        const gallery = document.querySelector('.gallery');
+
+        const postArray = [
+            {
+                name: 'Anish Kumar',
+                img: './profile.svg',
+                caption: 'Met first time with Pritam Sir in electrical lab.\nIt was a pleasure to be with such a respected person.',
+                gender: 'male',
+            },
+            {
+                name: 'Jatin Kumar',
+                img: './profile.svg',
+                caption: 'Met first time with Pritam Sir in electrical lab.\nIt was a pleasure to be with such a respected person.',
+                gender: 'male',
+            },
+            {
+                name: 'Diptanshu IITP',
+                img: './profile.svg',
+                caption: 'Met first time with Pritam Sir in electrical lab.\nIt was a pleasure to be with such a respected person.',
+                gender: 'male',
+            },
+            {
+                name: 'Pritam Sir',
+                img: './profile.svg',
+                caption: 'Met first time with Pritam Sir in electrical lab.\nIt was a pleasure to be with such a respected person.',
+                gender: 'unknown',
+            },
+            {
+                name: 'Nitin',
+                img: './profile.svg',
+                caption: 'Met first time with Pritam Sir in electrical lab.\nIt was a pleasure to be with such a respected person.',
+                gender: 'female',
+            },
+            {
+                name: 'Shashwat',
+                img: './profile.svg',
+                caption: 'Pookie Wookie',
+                gender: 'bear'
+            }
+        ]
+
+        postArray.forEach(post => {
+            const postContent = document.createElement('div');
+            postContent.classList.add('post-content');
+            postContent.innerHTML = `
+                <div class="post-content-profile">
+                    <img src="${post.img}" alt="Profile">
+                </div>
+                <div class="post-content-details">
+                    <div class="post-content-name">${post.name}</div>
+                    <div class="post-content-caption">${post.caption}</div>
+                </div>
+            `;
+            if (post.gender === 'male') {
+                postContent.style.backgroundColor = '#8080FF';
+            } else if (post.gender === 'female') {
+                postContent.style.backgroundColor = '#FF8080';
+            } else {
+                postContent.style.backgroundColor = '#B0B0B0';
+            }
+            newPostContainer.appendChild(postContent);
+        });
+
+        const postContent = document.querySelectorAll('.post-content');
+        postContent.forEach((post, index) => {
+            post.addEventListener('mouseover', () => {
+                post.style.filter = 'brightness(0.8)';
+            });
+            post.addEventListener('mouseout', () => {
+                post.style.filter = 'brightness(1)';
+            });
+        });
+
+        const photos = document.querySelector('.photos');
+        const galleryPhotos = [
+            {
+                img: './profile.svg',
+                name: 'Anish Kumar'
+            },
+            {
+                img: './profile.svg',
+                name: 'Jatin Kumar'
+            },
+            {
+                img: './profile.svg',
+                name: 'Diptanshu IITP'
+            },
+            {
+                img: './profile.svg',
+                name: 'Pritam Sir'
+            },
+            {
+                img: './profile.svg',
+                name: 'Nitin'
+            },
+            {
+                img: './profile.svg',
+                name: 'Shashwat'
+            },
+            {
+                img: './profile.svg',
+                name: 'Anish Kumar'
+            },
+            {
+                img: './profile.svg',
+                name: 'Jatin Kumar'
+            },
+            {
+                img: './profile.svg',
+                name: 'Diptanshu IITP'
+            },
+            {
+                img: './profile.svg',
+                name: 'Pritam Sir'
+            },
+            {
+                img: './profile.svg',
+                name: 'Nitin'
+            },
+            {
+                img: './profile.svg',
+                name: 'Shashwat'
+            },
+            {
+                img: './profile.svg',
+                name: 'Anish Kumar'
+            },
+            {
+                img: './profile.svg',
+                name: 'Jatin Kumar'
+            },
+            {
+                img: './profile.svg',
+                name: 'Diptanshu IITP'
+            },
+            {
+                img: './profile.svg',
+                name: 'Pritam Sir'
+            },
+            {
+                img: './profile.svg',
+                name: 'Nitin'
+            },
+            {
+                img: './profile.svg',
+                name: 'Shashwat'
+            },
+            {
+                img: './profile.svg',
+                name: 'Anish Kumar'
+            },
+            {
+                img: './profile.svg',
+                name: 'Jatin Kumar'
+            },
+            {
+                img: './profile.svg',
+                name: 'Diptanshu IITP'
+            },
+            {
+                img: './profile.svg',
+                name: 'Pritam Sir'
+            },
+            {
+                img: './profile.svg',
+                name: 'Nitin'
+            },
+            {
+                img: './profile.svg',
+                name: 'Shashwat'
+            }
+        ]
+
+        galleryPhotos.forEach(photo => {
+            const galleryPhoto = document.createElement('div');
+            galleryPhoto.classList.add('gallery-photo');
+            galleryPhoto.innerHTML = `
+                <img src="${photo.img}" alt="Profile">
+            `;
+            photos.appendChild(galleryPhoto);
+        });
+
+        const galleryPhoto = document.querySelectorAll('.gallery-photo');
+        galleryPhoto.forEach((photo, index) => {
+            photo.addEventListener('mouseover', () => {
+                photo.style.filter = 'brightness(0.8)';
+            });
+            photo.addEventListener('mouseout', () => {
+                photo.style.filter = 'brightness(1)';
+            });
+        });
+
+        const containerBody = document.querySelector('.container-body');
+
+        galleryPhoto.forEach((photo, index) => {
+            photo.addEventListener('click', () => {
+                //make the photo cover the body and show the photo
+                const photoCover = document.createElement('div');
+                photoCover.classList.add('photo-cover');
+                photoCover.innerHTML = `
+                    <img src="${galleryPhotos[index].img}" alt="Profile">
+                    <div class="photo-cover-name">${galleryPhotos[index].name}</div>
+                `;
+                containerBody.appendChild(photoCover);
+                photoCover.addEventListener('click', () => {
+                    containerBody.removeChild(photoCover);
+                });
+
+            });
+        });
+
+        const uploadButton = document.querySelector('.upload-button');
+        //clicking upload button will open the file dialog and push the image in galleryPhotos
+        uploadButton.addEventListener('click', () => {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.click();
+            input.addEventListener('change', () => {
+                const file = input.files[0];
+                const reader = new FileReader();
+                reader.onload = () => {
+                    galleryPhotos.push({
+                        img: reader.result,
+                        name: 'Anish Kumar'
+                    });
+                    const galleryPhoto = document.createElement('div');
+                    galleryPhoto.classList.add('gallery-photo');
+                    galleryPhoto.innerHTML = `
+                        <img src="${reader.result}" alt="Profile">
+                    `;
+                    photos.appendChild(galleryPhoto);
+                    galleryPhoto.addEventListener('mouseover', () => {
+                        galleryPhoto.style.filter = 'brightness(0.8)';
+                    });
+                    galleryPhoto.addEventListener('mouseout', () => {
+                        galleryPhoto.style.filter = 'brightness(1)';
+                    });
+                    galleryPhoto.addEventListener('click', () => {
+                        const photoCover = document.createElement('div');
+                        photoCover.classList.add('photo-cover');
+                        photoCover.innerHTML = `
+                            <img src="${reader.result}" alt="Profile">
+                            <div class="photo-cover-name">Anish Kumar</div>
+                        `;
+                        containerBody.appendChild(photoCover);
+                        photoCover.addEventListener('click', () => {
+                            containerBody.removeChild(photoCover);
+                        });
+                    });
+                }
+                reader.readAsDataURL(file);
+            });
+        });
+        
     </script>
 </body>
 
